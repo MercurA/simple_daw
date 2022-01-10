@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import AudioAnalyser from '../analyser/analyser';
+import Drag from '../dnd/Drag';
 import Dropdown from '../inputs/Dropdown';
 import Slider from '../inputs/Slider';
 import AudioVisualiser from '../visualiser';
@@ -63,7 +64,9 @@ const Main = ({ ctx }) => {
       <Slider getValue={handleGainLevel} name="Sustain Level" min={'1'} max={'10'} reduce={true} />
       <Slider getValue={handleFreq} name="Frequency" min={'220'} max={'880'} />
       <Dropdown getValue={handleType} />
-      <AudioVisualiser audioData={dataArray} analyser={analyser} />
+      <Drag>
+        <AudioVisualiser audioData={dataArray} analyser={analyser} />
+      </Drag>
     </div>
   )
 }
