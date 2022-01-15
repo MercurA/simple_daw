@@ -1,0 +1,27 @@
+.container {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.draggable {
+  width: 100px;
+  height: 100px;
+}
+
+.drop_1 {
+  width: 100%;
+  height: 100%;
+  left: 100px;
+  display: flex;
+}
+
+.dragged {
+  border: 1px solid green;
+}
+
+.audioContainer {
+  height: 100%;
+  width: 300px;
+  border: 2px solid white;
+}

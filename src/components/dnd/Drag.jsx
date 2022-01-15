@@ -20,7 +20,6 @@ class Drag extends Component {
       document.addEventListener('mousemove', this.handleOnMouseMove)
       document.addEventListener('mouseup', this.handleMouseUp)
     } else if (!this.state.dragging && state.dragging) {
-      console.log('remove')
       document.removeEventListener('mousemove', this.handleOnMouseMove)
       document.removeEventListener('mouseup', this.handleMouseUp)
     }
