@@ -62,7 +62,7 @@ class Drag extends Component {
       <div
         ref={this.dragRef}
         style={{
-          position: 'absolute',
+          // position: 'absolute',
           left: `${this.state.pos.x}px`,
           top: `${this.state.pos.y}px`,
         }}

@@ -1,51 +1,50 @@
-import PropTypes from "prop-types"
-import { useEffect } from "react"
-import { Copy } from '../../utils/constants'
+import React, { useState, useRef, useEffect } from 'react'
+import { Move } from "../../utils/constants";
+import classNames from 'classnames';
+import './styles.scss'
 
-const Drop = ({ children, onDataDrop }) => {
+const Drop_1 = ({ dragOver, type }) => {
+  const [item, setItem] = useState([]);
+  const [isDragged, setDragged] = useState(false);
+  const dragItem = useRef();
 
   useEffect(() => {
-    document.addEventListener('ondragover', preventDefaultDragOver)
-    document.addEventListener('ondrop', preventDefaultDrop)
-    return () => {
-      document.removeEventListener('ondragover', preventDefaultDragOver)
-      document.removeEventListener('ondrop', preventDefaultDrop)
-    }
-  })
+    setDragged(isDragged)
+    dragOver(isDragged, item)
+  }, [isDragged])
 
-  const preventDefaultDragOver = (e) => {
+  const handleDrop = (e) => {
     e.preventDefault();
-  }
-
-  const preventDefaultDrop = (e) => {
-    e.preventDefault();
+    e.stopPropagation();
+    const data = e.dataTransfer.getData("application/audio");
+    setItem([...item, data])
+    setDragged(false)
   }
 
   const handleDragOver = (e) => {
-    e.stopPropagation();
     e.preventDefault();
-    e.dataTransfer.dropEffect = Copy
+    e.dataTransfer.effectAllowed = Move;
+    setDragged(true)
   }
 
-  const handleDrop = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    onDataDrop && onDataDrop(e.dataTransfer.files[0])
-  }
+  const classes = classNames({
+    [`${type}Container`]: type === 'audio'
+  })
 
   return (
     <div
-      onDragOver={handleDragOver}
+      ref={dragItem}
+      id="drop"
+      className="drop_1"
       onDrop={handleDrop}
+      onDragOver={handleDragOver}
     >
-      {children}
-    </div>
+      {/* {item.map((name, idx) => (<div key={idx} className={classes}>{name}</div>))} */}
+      <div className='audioContainer'>
+        <div className='header'>{'Name'}</div>
+      </div>
+    </div >
   )
 }
 
-Drop.propType = {
-  children: PropTypes.object.isRequired,
-  onDataDrop: PropTypes.fn
-}
-
-export default Drop;
+export default Drop_1;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classNames from "classnames";
-import Drop_1 from '../dnd/Drop_1';
+import Drop from '../dnd/Drop';
 
 import './styles.scss';
 
@@ -20,7 +20,7 @@ const AudioRack = ({ children }) => {
 
   return (
     <div className={classes}>
-      <Drop_1 dragOver={handleDragOver} type={'audio'} />
+      <Drop dragOver={handleDragOver} type={'audio'} />
     </div>
   )
 }

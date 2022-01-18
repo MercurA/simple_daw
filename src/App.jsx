@@ -3,11 +3,12 @@ import './App.scss';
 import Draggable from './components/dnd/Draggable';
 import DragTrigger from './components/dnd/DragTrigger';
 import Drop from './components/dnd/Drop';
-import Drop_1 from './components/dnd/Drop_1';
+import Drop_1 from './components/dnd/Drop';
 import Main from './components/main';
 import AudioRack from './components/racks/AudioRack';
 import FileRack from './components/racks/FileRack';
 import PluginRack from './components/racks/PluginRack';
+import TimelineWrapper from './components/timeline';
 // import Keyboard from './components/keyboard/Keyboard';
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
       {/* <div className='appContainer'>
         {audioCtx ? <Main ctx={audioCtx} /> : ''}
       </div> */}
-      <AudioRack />
+      {/* <AudioRack />
       <FileRack>
         <ul>
           <Draggable id={'audio'}>
@@ -39,7 +40,8 @@ const App = () => {
       </FileRack>
       <PluginRack>
         <div>TEST</div>
-      </PluginRack>
+      </PluginRack> */}
+      <TimelineWrapper />
     </div>
   );
 }

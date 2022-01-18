@@ -6,7 +6,7 @@
 
 .draggable {
   width: 100px;
-  height: 100px;
+  height: 100%;
 }
 
 .drop_1 {
@@ -17,6 +17,7 @@
 }
 
 .dragged {
+  height: 100%;
   border: 1px solid green;
 }
 
@@ -24,4 +25,8 @@
   height: 100%;
   width: 300px;
   border: 2px solid white;
+}
+
+.header {
+  height: 25px;
 }
