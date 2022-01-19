@@ -3,14 +3,14 @@ import classNames from 'classnames';
 import './styles.scss';
 import { ReactComponent as IconPlay } from '../../assets/icons/play.svg'
 import { ReactComponent as IconPause } from '../../assets/icons/pause.svg';
-import Draggable from '../dnd/Draggable';
+import { getPosition } from './helpers';
 
 let count = 0;
-const TimelineWrapper = () => {
+const TimelineWrapper = ({ parentRef }) => {
   const cursorRef = useRef(null);
+  const containerRef = useRef(null);
   const [id, setId] = useState(undefined);
   const [isPlaying, setPlay] = useState(false);
-  const [cursorPos, setCursorPos] = useState(0);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -25,8 +25,6 @@ const TimelineWrapper = () => {
       if (isPlaying) {
         moveCursor()
       } else {
-        let lastCursorPos = Number(cursorRef.current.style.left.split('px')[0])
-        setCursorPos(lastCursorPos)
         clearTimeout(id);
       }
     }
@@ -42,21 +40,27 @@ const TimelineWrapper = () => {
   }
 
   const moveCursor = () => {
+    var xPosition = getPosition(containerRef, cursorRef);
+    if (count === window.innerWidth - xPosition - 9) {
+      count = 0;
+    }
     count += 1;
-    cursorRef.current.style.left = count + 'px'
+    cursorRef.current.style.left = `${count}px`
     let timer = setTimeout(function () {
       moveCursor()
     }, 1000 / 60)
+
     setId(timer)
   }
 
   const play = () => {
     setPlay(!isPlaying)
-    setCursorPos(count);
   }
 
   const handleOnClick = (e) => {
-    debugger
+    var xPosition = e.clientX - getPosition(containerRef, cursorRef);
+    cursorRef.current.style.left = `${xPosition}px`;
+    count = xPosition;
   }
 
   const classes = classNames({
@@ -64,7 +68,7 @@ const TimelineWrapper = () => {
   })
 
   return (
-    <div className={classes}>
+    <div className={classes} ref={containerRef}>
       <div className='innerContainer' onClick={handleOnClick}>
         <div className='header'>
           <div className='playBtn' onClick={play}>

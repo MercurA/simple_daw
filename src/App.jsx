@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './App.scss';
 import Draggable from './components/dnd/Draggable';
 import DragTrigger from './components/dnd/DragTrigger';
@@ -12,6 +12,7 @@ import TimelineWrapper from './components/timeline';
 // import Keyboard from './components/keyboard/Keyboard';
 
 const App = () => {
+  const parentRef = useRef();
   const [audioCtx, setAudioCtx] = useState(null);
   const [fileDropped, setFileDropped] = useState(false);
 
@@ -21,7 +22,7 @@ const App = () => {
 
 
   return (
-    <div className="App">
+    <div className="App" ref={parentRef}>
       {/* <div className='appContainer'>
         {audioCtx ? <Main ctx={audioCtx} /> : ''}
       </div> */}
@@ -41,7 +42,7 @@ const App = () => {
       <PluginRack>
         <div>TEST</div>
       </PluginRack> */}
-      <TimelineWrapper />
+      <TimelineWrapper parentRef={parentRef} />
     </div>
   );
 }
